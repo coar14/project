@@ -19,18 +19,6 @@ class Element
         return $this;
     }
 
-    public function setEventAttribute(string $name, string $value): self
-    {
-        $this->attributes[] = new EventAttribute($name, $value);
-        return $this;
-    }
-
-    public function setDataAttribute(string $name, string $value): self
-    {
-        $this->attributes[] = new DataAttribute($name, $value);
-        return $this;
-    }
-
     public function addContent(Element $element): self
     {
         $this->content[] = $element;

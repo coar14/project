@@ -1,95 +1,82 @@
 <?php
+require_once 'autoloader.php';
 
-require 'autoloader.php';
+$html = new \HtmlGenerator\Html();
+$htmlContent = $html->html()
+    ->head()
+        ->meta()->setAttribute('charset', 'UTF-8')->getParentEnd()
+        ->meta()->setAttribute('name', 'viewport')->setAttribute('content', 'width=device-width, initial-scale=1.0')->getParentEnd()
+        ->link()->setAttribute('rel', 'stylesheet')->setAttribute('href', 'styles.css')->getParentEnd()
+        ->title()->setText('Document')->closeTag()->setText('title')->getParentEnd()
+    ->body()
+        ->h1()->getParentEnd()->setText('This is an h1 without a tag!')->closeTag()->setText('h1')->getParentEnd()
+        ->h1()->setAttribute('id', 'try')->getParentEnd()->setText('H1 with an id try')->closeTag()->setText('h1')->getParentEnd()
+        ->h2()->setText('This is an h2')->closeTag()->setText('h2')->getParentEnd()
+        ->h3()->setText('This is an h3')->closeTag()->setText('h3')->getParentEnd()
+        ->h4()->setText('This is an h4')->closeTag()->setText('h4')->getParentEnd()
+        ->h5()->setText('This is an H5')->closeTag()->setText('h5')->getParentEnd()
+        ->h6()->setText('The one that got away')->closeTag()->setText('h6')->getParentEnd()
+        ->p()->setText('This is a p tag')->closeTag()->setText('p')->getParentEnd()
+        ->p()->setText('This is an ')->em()->setText('emphasized')->closeTag()->setText('em')->getParentEnd()
+        ->strong()->setText('I am Strong!')->closeTag()->setText('strong')->getParentEnd()
+        ->textarea()->setText("This is a textarea. You can type here.")->closeTag()->setText('textarea')->getParentEnd()
+        ->img()->setAttribute('src', 'sauron.webp')->setAttribute('alt', 'sana')->getParentEnd()
+        ->p()->setText('This is ')->span()->setText('blue')->closeTag()->setText('span')->getParentEnd()
+        ->button()->setText('Button')->getParentEnd()
+        ->div()->setAttribute('class', 'container')->getParentEnd()
+        ->ul()->setText('unordered list')
+        ->li()->setText('item 1')->closeTag()->setText('li')->getParentEnd()        
+        ->closeTag()->setText('ul')->getParentEnd()
+        ->ol()->setText('ordered list')
+        ->li()->setText('item abc')->closeTag()->setText('li')->getParentEnd()
+        ->closeTag()->setText('ol')->getParentEnd()
+        ->section()->setAttribute('class', 'box')->getParentEnd()->setText('wow')->closeTag()->setText('section')->getParentEnd()
+        ->div()->setAttribute('class', 'container')->getParentEnd()
+            ->p()->setText('This is an ')->abbr()->setText('abbr')->closeTag()->setText('abbr')->getParentEnd()   
+            ->p()->setText('This is a ')->cite()->setText('cite')->closeTag()->setText('cite')->getParentEnd()   
+            ->p()->setText('This is a ')->code()->setText('code')->closeTag()->setText('code')->getParentEnd()   
+            ->p()->setText('This is a ')->dn()->setText('dn')->closeTag()->setText('dn')->getParentEnd()   
+            ->p()->setText('This is a ')->samp()->setText('samp')->closeTag()->setText('samp')->getParentEnd()   
+            ->p()->setText('This is a ')->var()->setText('var')->closeTag()->setText('var')->getParentEnd()   
+        ->closeTag()->setText('div')->getParentEnd()
+        ->div()->getParentEnd()
+        ->address()->getParentEnd()
+        ->setText('Written by')
+        ->a()->setAttribute('href','mailto:webmaster@example.com')->getParentEnd()
+        ->setText('John Doe.')->closeTag()->setText('a')->getParentEnd()
+        ->setText('Visit us at:')->br()
+        ->setText('Visit us at:')->br()
+        ->setText('Box 564, Disneyland')->br()
+        ->setText('USA')
+        ->closeTag()->setText('address')->getParentEnd()
+        ->closeTag()->setText('div')->getParentEnd()
+        ->div()->setAttribute('class', 'containerTwo')->getParentEnd()
+            ->article()->setText('Article Content')->closeTag()->setText('article')->getParentEnd()
+            ->aside()->setText('Aside Content')->closeTag()->setText('aside')->getParentEnd()
+            ->footer()->setText('Footer Content')->closeTag()->setText('footer')->getParentEnd()
+            ->main()->setText('Main Content')->closeTag()->setText('main')->getParentEnd()
+            ->nav()->setText('Navigation Content')->closeTag()->setText('nav')->getParentEnd()
+            ->section()->getParentEnd()->setText('Section Content')->closeTag()->setText('section')->getParentEnd()
+        ->div()->getParentEnd()
+    //     ->label()->setAttribute('for', 'username')->setText('Username:')->getParentEnd()
+    //     ->input()->setAttribute('type', 'text')->setAttribute('id', 'username')->setAttribute('name', 'username')->getParentEnd()->getParentEnd()
+    //     ->label()->setAttribute('for', 'password')->setText('Password:')->getParentEnd()
+    //     ->input()->setAttribute('type', 'password')->setAttribute('id', 'password')->setAttribute('name', 'password')->getParentEnd()->getParentEnd()
+    //     ->table()->getParentEnd()
+    //         ->tr()->setAttribute('style', 'background-color: #f9f9f9;')->getParentEnd()
+    //             ->td()->setAttribute('style', 'padding: 8px; border: 1px solid #ddd;')->setText('Table Data')->getParentEnd()
+    //             ->td()->setAttribute('style', 'padding: 8px; border: 1px solid #ddd;')->setText('Table Data')->getParentEnd()
+    //             ->td()->setAttribute('style', 'padding: 8px; border: 1px solid #ddd;')->setText('Table Data')->getParentEnd()
+    //         ->getParent()
+    //         ->tr()->setAttribute('style', 'background-color: #f9f9f9;')->getParentEnd()
+    //             ->td()->setAttribute('style', 'padding: 8px; border: 1px solid #ddd;')->setText('Table Data')->getParentEnd()
+    //             ->td()->setAttribute('style', 'padding: 8px; border: 1px solid #ddd;')->setText('Table Data')->getParentEnd()
+    //             ->td()->setAttribute('style', 'padding: 8px; border: 1px solid #ddd;')->setText('Table Data')->getParentEnd()
+    //         ->getParent()
+    //     ->getParent()
+    //     ->h4()->setAttribute('id', 'ouch')->setText('This is a heading')->getParentEnd()
+    //     ->div()->setAttribute('id', '')->setText('Turn it in')->getParentEnd()
+    // ->getParentEnd()
+    ->close();
 
-use HtmlGenerator\Html;
-use CSSGenerator\Headings\HtmlStylerH1;
-
-$html = new Html();
-$styler = new HtmlStylerH1();
-
-$library = $html->html()->addContent(
-    $html->head()->addContent(
-        $html->h1()->setText('Welcome Banner')
-    )
-)->addContent(
-    $html->body()->addContent(
-        $html->header()->addContent(
-            $html->h1()->setText('This is Header 1')
-        )
-    )->addContent(
-        $html->nav()->addContent(
-            $html->ul()->addContent(
-                $html->li()->addContent(
-                    $html->a()->setAttribute('href', 'https://example.com')->setText('Home')
-                )
-            )->addContent(
-                $html->li()->addContent(
-                    $html->a()->setAttribute('href', 'https://example.com/about')->setText('About')
-                )
-            )->addContent(
-                $html->li()->addContent(
-                    $html->a()->setAttribute('href', 'https://example.com/contact')->setText('Contact')
-                )
-            )
-        )
-    )->addContent(
-        $html->main()->addContent(
-            $html->article()->addContent(
-                $html->h2()->setText('This is Header 2')
-            )->addContent(
-                $html->p()->setText('This is for the paragraph content goes here.')
-            )->addContent(
-                $html->h3()->setText('This is Header 3.')
-            )->addContent(
-                $html->h4()->setText('This is Header 4.')
-            )->addContent(
-                $html->h5()->setText('This is Header 5.')
-            )->addContent(
-                $html->h6()->setText('This is Header 6.')
-            )
-        )
-    )->addContent(
-        $html->aside()->addContent(
-            $html->h3()->setText('Sidebar Title')
-        )->addContent(
-            $html->p()->setText('Sidebar content goes here.')
-        )
-    )->addContent(
-        $html->footer()->addContent(
-            $html->p()->setText('Footer content goes here.')
-        )
-    )->addContent(
-        $html->form()->setAttribute('action', 'process.php')->setAttribute('method', 'post')->addContent(
-            $html->label()->setAttribute('for', 'username')->setText('Username: ')
-        )->addContent(
-            $html->input()->setAttribute('type', 'text')->setAttribute('id', 'username')->setAttribute('name', 'username')
-        )->addContent(
-            $html->br()
-        )->addContent(
-            $html->label()->setAttribute('for', 'password')->setText('Password: ')
-        )->addContent(
-            $html->input()->setAttribute('type', 'password')->setAttribute('id', 'password')->setAttribute('name', 'password')
-        )->addContent(
-            $html->br()
-        )->addContent(
-            $html->input()->setAttribute('type', 'submit')->setAttribute('value', 'Submit')
-        )
-    )->addContent(
-        $html->table()->setAttribute('border', '1')->addContent(
-            $html->tr()->addContent(
-                $html->td()->setText('Full Name')
-            )->addContent(
-                $html->td()->setText('Year and Course')
-            )
-        )->addContent(
-            $html->tr()->addContent(
-                $html->td()->setText('Dora the Explorer')
-            )->addContent(
-                $html->td()->setText('4 - BS in Exploration Science')
-            )
-        )
-    )
-);
-
-echo $library->render();
+file_put_contents('output.html', $htmlContent);
